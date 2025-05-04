@@ -14,6 +14,9 @@ $chores_row = pg_fetch_assoc($chores_results);
     <title>Chores App</title>
 </head>
 <body>
+    // Pull in the navbar
+    <?php include 'navbar.php'; ?>
+
     <h1>Chores List</h1>
 
     <?php
