@@ -22,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = 'Username or password is incorrect';
         }
+    } else {
+        $error = 'Database error.';
     }
+}
 ?>
 
 <!DOCTYPE html>
