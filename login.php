@@ -1,6 +1,7 @@
 <?php
 include 'db.php'; // Connects to the database
 session_start();  // Starts the session to store login info
+$error = '';
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,19 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $user['password_hash'])) {
             // If password is correct, save user ID in the session
             $_SESSION['user_id'] = $user['user_id'];
-
-            // Redirect to the homepage after successful login
             header('Location: index.php');
             exit;
         } else {
-            // Password did not match
-            echo "Invalid password.";
+            $error = 'Username or password is incorrect';
         }
-    } else {
-        // No user found with that username
-        echo "User not found.";
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'navbar.php'; // Display the navbar ?>
 
 <h2>Login</h2>
+
+<?php if (!empty($error)): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?php echo htmlspecialchars($error); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    </div>
+<?php endif; ?>
 
 <!-- Login form -->
 <div class="container mt-4" style="max-width: 400px;">
