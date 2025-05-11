@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'header.php'; // Session handling via header.php file
 include 'db.php';
 
 if (!isset($_SESSION)) {

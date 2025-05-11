@@ -11,7 +11,7 @@ if ($dbconnect == false) {
 	// Connection failed
 	echo "Database connection failed.";
 } else { 
-	// Connection established
+	// Connection successfully established
 }
 
 ?> 
