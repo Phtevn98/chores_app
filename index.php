@@ -19,7 +19,7 @@ $chores_results = pg_query($dbconnect, "SELECT * FROM chores");
 <head>
     <meta charset="UTF-8">
     <title>Chores App</title>
-    <?php include 'header.php'; ?> <!-- Put this inside <head> -->
+    <?php include 'header.php'; ?>
 </head>
 <body>
 <?php include 'navbar.php'; ?>
@@ -32,5 +32,8 @@ $chores_results = pg_query($dbconnect, "SELECT * FROM chores");
         <?php endwhile; ?>
     </ul>
 </div>
+<?php
+include 'footer.php';
+?>
 </body>
 </html>
