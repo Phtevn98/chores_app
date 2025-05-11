@@ -29,5 +29,8 @@ $username = htmlspecialchars($_SESSION['username']);
 
     <p><strong>Username:</strong> <?php echo $username; ?></p>
 </div>
+<?php
+include 'footer.php';
+?>
 </body>
 </html>
