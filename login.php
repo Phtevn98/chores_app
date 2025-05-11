@@ -4,7 +4,7 @@ session_start();  // Starts session
 
 // Redirect the user if already logged in
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.php');
+    header('Location: index.php'); // Session handling via header.php file
     exit;
 }
 

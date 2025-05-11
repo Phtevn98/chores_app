@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'header.php'; // Session handling via header.php file
 
 if (!isset($_SESSION['user_id'], $_SESSION['username'])) {
     header('Location: login.php');
