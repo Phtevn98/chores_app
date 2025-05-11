@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Username or password is incorrect';
         }
     } else {
-        $error = 'Database error.';
+        $error = 'User does not exist.';
     }
 }
 ?>
@@ -60,6 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+        <!-- Link to sign-up page -->
+        <p> Don't have an account? <a href="/signup.php">Sign up here</a></p>
+
     </form>
 </body>
 </html>

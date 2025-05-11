@@ -1,5 +1,4 @@
 <?php
-
 include 'db.php';
 
 $chores = "SELECT * FROM chores";
@@ -14,23 +13,22 @@ $chores_row = pg_fetch_assoc($chores_results);
     <title>Chores App</title>
 </head>
 <body>
-    <!-- Pull in the navbar -->
-    <?php include 'navbar.php'; ?>
+<!-- Pull in the navbar -->
+<?php include 'navbar.php'; ?>
 
-    <h1>Chores List</h1>
+<h1>Chores List</h1>
 
-    <?php include 'header.php'?>
+<?php include 'header.php'?>
 
-    <?php
-    // pull chores from 'chores' table in the db and print as list
-	echo "<ul>";
-	while ($chores_row) {
-		echo "<li>" . $chores_row['chore_name'] . "</li>";
-		$chores_row = pg_fetch_assoc($chores_results);
-	}
-	echo "</ul>";
-    ?>
+<?php
+// pull chores from 'chores' table in the db and print as list
+echo "<ul>";
+while ($chores_row) {
+    echo "<li>" . $chores_row['chore_name'] . "</li>";
+    $chores_row = pg_fetch_assoc($chores_results);
+}
+echo "</ul>";
+?>
 
 </body>
 </html>
-
