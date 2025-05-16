@@ -1,0 +1,110 @@
+/* ===== Base ===== */
+body {
+    background-color: #f8f9fa; /* Bootstrap's light background */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+/* ===== Headings ===== */
+h1, h2, h3, h4 {
+    font-weight: 600;
+}
+
+/* ===== Navbar ===== */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.navbar .dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    padding-left: 1.25rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* ===== Forms ===== */
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Chores cards styling */
+.card {
+    transition: transform 0.15s, box-shadow 0.15s;
+    border-radius: 12px;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 24px rgba(60, 60, 110, 0.08);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #22577a;
+    letter-spacing: 0.02em;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #444;
+}
+
+.card-footer {
+    background: #f8f9fa;
+    font-size: 0.95rem;
+    color: #888;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+.badge.bg-primary {
+    background-color: #38a3a5 !important;
+    font-size: 0.93rem;
+    margin-top: 0.5em;
+}
+
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.07rem;
+    }
+    .card-text {
+        font-size: 0.98rem;
+    }
+}
+
+/* Padding for the grid of chore cards */
+.chore-cards-container {
+    padding: 32px 0 32px 0;  /* Top and bottom padding */
+}
+
+/* Optional: Left/right padding on smaller screens */
+@media (max-width: 768px) {
+    .chore-cards-container {
+        padding: 16px 8px 24px 8px;
+    }
+}
