@@ -24,6 +24,11 @@ $chores_results = pg_query($dbconnect, "SELECT * FROM chores");
 <body>
 <?php include 'navbar.php'; ?>
 
+<div class="text-center mt-3">
+    <h4 class="text-info">🧽 Time to tackle some chores! Let’s see what’s on the board...</h4>
+</div>
+
+
 <div class="chore-cards-container">
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
         <?php while ($chore = pg_fetch_assoc($chores_results)): ?>
