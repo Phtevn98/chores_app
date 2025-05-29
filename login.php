@@ -38,14 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login Page</title>
     <?php include 'header.php'; ?>
 </head>
 <body>
 <?php include 'navbar.php'; ?>
 
 <div class="container mt-5" style="max-width: 400px;">
-    <h2 class="text-center mb-4">Login</h2>
+    <h2 class="text-center mb-4">Login Page</h2>
+    <h2 class="text-center mb-4">Login Page</h2>
 
     <?php if (!empty($error)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
