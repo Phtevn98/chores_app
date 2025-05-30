@@ -2,8 +2,23 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-?>
 
+// get db connection
+require_once __DIR__ . '/db.php';
+
+// get user language, default to en
+$lang_code = 'en';
+if (isset($_SESSION['user_id'])) {
+    $result = pg_query_params($dbconnect, 'SELECT lang_code FROM users WHERE user_id = $1', [$_SESSION['user_id']]);
+    if ($row = pg_fetch_assoc($result)) {
+        $lang_code = $row['lang_code'] ?? 'en';
+    }
+}
+
+// load language pack
+$lang = require __DIR__ . "/lang/{$lang_code}.php";
+
+?>
 <!-- Meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
