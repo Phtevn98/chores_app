@@ -18,11 +18,17 @@ while ($row = pg_fetch_assoc($user_result)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $chore_name = pg_escape_string($dbconnect, $_POST['chore_name']);
-    $description = pg_escape_string($dbconnect, $_POST['description']);
-    $frequency = pg_escape_string($dbconnect, $_POST['frequency']);
-    $next_due_at = !empty($_POST['next_due_at']) ? pg_escape_string($dbconnect, $_POST['next_due_at']) : null;
-    $next_to_complete_by = !empty($_POST['next_to_complete_by']) ? intval($_POST['next_to_complete_by']) : 'NULL';
+    $chore_name_raw = filter_input(INPUT_POST, 'chore_name', FILTER_SANITIZE_STRING);
+    $description_raw = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $frequency_raw = filter_input(INPUT_POST, 'frequency', FILTER_SANITIZE_STRING);
+    $next_due_at_raw = filter_input(INPUT_POST, 'next_due_at', FILTER_SANITIZE_STRING);
+    $next_to_complete_by_raw = filter_input(INPUT_POST, 'next_to_complete_by', FILTER_SANITIZE_NUMBER_INT);
+
+    $chore_name = pg_escape_string($dbconnect, $chore_name_raw);
+    $description = pg_escape_string($dbconnect, $description_raw);
+    $frequency = pg_escape_string($dbconnect, $frequency_raw);
+    $next_due_at = !empty($next_due_at_raw) ? pg_escape_string($dbconnect, $next_due_at_raw) : null;
+    $next_to_complete_by = !empty($next_to_complete_by_raw) ? intval($next_to_complete_by_raw) : 'NULL';
 
     $query = "INSERT INTO chores (chore_name, description, frequency, next_due_at, next_to_complete_by)
               VALUES ('$chore_name', '$description', '$frequency', " .
