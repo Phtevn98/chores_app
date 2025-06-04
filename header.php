@@ -13,12 +13,20 @@ if (isset($_SESSION['user_id'])) {
     if ($row = pg_fetch_assoc($result)) {
         $lang_code = $row['lang_code'] ?? 'en';
     }
+
+    // Check admin status only once per session
+    if (!isset($_SESSION['is_site_admin'])) {
+        $admin_result = pg_query_params($dbconnect, 'SELECT 1 FROM site_administrators WHERE user_id = $1 LIMIT 1', [$_SESSION['user_id']]);
+        $_SESSION['is_site_admin'] = (pg_num_rows($admin_result) > 0);
+    }
+} else {
+    $_SESSION['is_site_admin'] = false;
 }
 
 // load language pack
 $lang = require __DIR__ . "/lang/{$lang_code}.php";
-
 ?>
+
 <!-- Meta -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
