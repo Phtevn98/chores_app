@@ -1,36 +1,41 @@
 <?php
-include 'db.php'; // Connects to the database
-session_start();  // Starts session
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-// Redirect the user if already logged in
+define('BASE_PATH', realpath(__DIR__));
+include BASE_PATH . '/db.php';
+
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.php'); // Session handling via header.php file
+    header('Location: /index.php');
     exit;
 }
 
 $error = '';
 
-// Handle login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
 
-    // Case-insensitive username match
-    $result = pg_query_params($dbconnect, "SELECT * FROM users WHERE LOWER(username) = LOWER($1)", [$username]);
-
-    if ($result && pg_num_rows($result) === 1) {
-        $user = pg_fetch_assoc($result);
-
-        if (password_verify($password, $user['password_hash'])) {
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['username'] = $user['username'];
-            header('Location: index.php');
-            exit;
-        } else {
-            $error = 'Username or password is incorrect.';
-        }
+    if ($username === '' || $password === '') {
+        $error = 'Please enter both username and password.';
     } else {
-        $error = 'User does not exist.';
+        $result = pg_query_params($dbconnect, "SELECT * FROM users WHERE LOWER(username) = LOWER($1)", [$username]);
+
+        if ($result && pg_num_rows($result) === 1) {
+            $user = pg_fetch_assoc($result);
+
+            if (password_verify($password, $user['password_hash'])) {
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['username'] = $user['username'];
+                header('Location: /index.php');
+                exit;
+            } else {
+                $error = 'Username or password is incorrect.';
+            }
+        } else {
+            $error = 'User does not exist.';
+        }
     }
 }
 ?>
@@ -39,17 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <?php include 'header.php'; ?>
 </head>
 <body>
-<?php include 'navbar.php'; ?>
+<?php include BASE_PATH . '/navbar.php'; ?>
 
 <div class="container mt-5" style="max-width: 400px;">
     <h2 class="text-center mb-4">Login Page</h2>
 
-    <?php if (!empty($error)): ?>
+    <?php if ($error !== ''): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo htmlspecialchars($error); ?>
+            <?= htmlspecialchars($error) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
@@ -72,5 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </form>
 </div>
+
+<?php include BASE_PATH . '/footer.php'; ?>
 </body>
 </html>

@@ -10,13 +10,13 @@ $debug = false;
 $debug_level = 0;
 $config_result = pg_query($dbconnect, "SELECT debug, debug_level FROM site_config WHERE id = 1");
 if ($config_result && $row = pg_fetch_assoc($config_result)) {
-    $debug = $row['debug'] === 't';
-    $debug_level = $row['debug_level'];
+    $debug = ($row['debug'] === 't');
+    $debug_level = (int)$row['debug_level'];
 }
 
 // get user language, default to en
 $lang_code = 'en';
-if (isset($_SESSION['user_id'])) {
+if (!empty($_SESSION['user_id'])) {
     $result = pg_query_params($dbconnect, 'SELECT lang_code FROM users WHERE user_id = $1', [$_SESSION['user_id']]);
     if ($row = pg_fetch_assoc($result)) {
         $lang_code = $row['lang_code'] ?? 'en';
