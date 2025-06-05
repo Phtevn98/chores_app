@@ -5,6 +5,7 @@ if (!isset($_SESSION)) {
 
 define('BASE_PATH', realpath(__DIR__));
 include BASE_PATH . '/db.php';
+include BASE_PATH . '/header.php';
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /index.php');

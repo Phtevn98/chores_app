@@ -10,4 +10,5 @@ return [
     'profile'        => 'My Profile',
     'view_profile'   => 'View Profile',
     'logout'         => 'Logout',
+    'site_config'    => 'Site Config',
 ];

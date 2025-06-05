@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="/index.php">
             Chores App <i class="fa-solid fa-hands-bubbles ms-1" aria-hidden="true"></i>
             <span class="visually-hidden">Chores App Icon</span>
         </a>
@@ -13,10 +13,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <?php if (isset($_SESSION['user_id'])): ?>
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'add_chores.php' ? 'active' : ''; ?>"
-                           href="add_chores.php"><?= htmlspecialchars($lang['add_chore'] ?? 'Add Chore') ?></a>
-                    </li>
+                    <?php if (!empty($_SESSION['is_site_admin'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'add_chores.php' ? 'active' : ''; ?>"
+                               href="/add_chores.php"><?= htmlspecialchars($lang['add_chore'] ?? 'Add Chore') ?></a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <ul class="navbar-nav">
@@ -28,9 +30,9 @@
                             <?= htmlspecialchars($lang['profile'] ?? 'My Profile') ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile.php"><?= htmlspecialchars($lang['view_profile'] ?? 'View Profile') ?></a></li>
+                            <li><a class="dropdown-item" href="/profile.php"><?= htmlspecialchars($lang['view_profile'] ?? 'View Profile') ?></a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="logout.php"><?= htmlspecialchars($lang['logout'] ?? 'Logout') ?></a></li>
+                            <li><a class="dropdown-item" href="/logout.php"><?= htmlspecialchars($lang['logout'] ?? 'Logout') ?></a></li>
                         </ul>
                     </li>
                 </ul>
