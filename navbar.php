@@ -14,11 +14,47 @@
             <?php if (isset($_SESSION['user_id'])): ?>
                 <ul class="navbar-nav me-auto">
                     <?php if (!empty($_SESSION['is_site_admin'])): ?>
-                        <li class="nav-item">
-                            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'add_chores.php' ? 'active' : ''; ?>"
-                               href="/add_chores.php"><?= htmlspecialchars($lang['add_chore'] ?? 'Add Chore') ?></a>
+                        <!-- Admin Panel Dropdown with horizontal grid -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-shield-lock me-1"></i>
+                                <?= htmlspecialchars($lang['admin_panel'] ?? 'Admin Panel') ?>
+                            </a>
+                            <div class="dropdown-menu p-3" aria-labelledby="adminDropdown" style="min-width: 340px;">
+                                <!-- User Management Group -->
+                                <h6 class="dropdown-header"><?= htmlspecialchars($lang['user_management'] ?? 'User Management') ?></h6>
+                                <div class="row gx-2 mb-2">
+                                    <div class="col-6">
+                                        <a class="dropdown-item text-center" href="/create_user.php"><?= htmlspecialchars($lang['create_user'] ?? 'Create User') ?></a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="dropdown-item text-center" href="/admin/user_list.php"><?= htmlspecialchars($lang['manage_users'] ?? 'Manage Users') ?></a>
+                                    </div>
+                                </div>
+                                <hr class="dropdown-divider">
+                                <!-- Chore Management Group -->
+                                <h6 class="dropdown-header"><?= htmlspecialchars($lang['chore_management'] ?? 'Chore Management') ?></h6>
+                                <div class="row gx-2 mb-2">
+                                    <div class="col-6">
+                                        <a class="dropdown-item text-center" href="/add_chores.php"><?= htmlspecialchars($lang['add_chore'] ?? 'Add Chore') ?></a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="dropdown-item text-center" href="/admin/chore_list.php"><?= htmlspecialchars($lang['manage_chores'] ?? 'Manage Chores') ?></a>
+                                    </div>
+                                </div>
+                                <hr class="dropdown-divider">
+                                <!-- Site Config Group -->
+                                <h6 class="dropdown-header"><?= htmlspecialchars($lang['site_configuration'] ?? 'Site Configuration') ?></h6>
+                                <div class="row gx-2">
+                                    <div class="col-6">
+                                        <a class="dropdown-item text-center" href="/admin/site_config.php"><?= htmlspecialchars($lang['site_config'] ?? 'Site Config') ?></a>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     <?php endif; ?>
+
                 </ul>
 
                 <ul class="navbar-nav">
