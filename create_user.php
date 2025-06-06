@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     die("Access denied: not logged in");
 }
 
-$checkAdmin = pg_query_params($dbconnect, "SELECT 1 FROM admins WHERE user_id = $1", [$_SESSION['user_id']]);
+$checkAdmin = pg_query_params($dbconnect, "SELECT 1 FROM site_administrators WHERE user_id = $1", [$_SESSION['user_id']]);
 
 if (pg_num_rows($checkAdmin) === 0) {
     die("Access denied: not an admin.");
